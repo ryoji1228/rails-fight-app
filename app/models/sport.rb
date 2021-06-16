@@ -4,4 +4,7 @@ class Sport < ApplicationRecord
   validates :name1, presence: true
   validates :name2, presence: true
   validates :result, presence: true
+  
+  belongs_to :user
+  
 end

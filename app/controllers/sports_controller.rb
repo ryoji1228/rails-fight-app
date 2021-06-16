@@ -1,6 +1,7 @@
 class SportsController < ApplicationController
     
     def index
+        p current_user
         @sports = Sport.all
         @sports = @sports.where(year: params[:year]) if params[:year].present?
         @sports = @sports.where(month: params[:month]) if params[:month].present?
@@ -18,6 +19,7 @@ class SportsController < ApplicationController
     
     def create
         sport_params = params.require(:sport).permit(:year, :month, :name1, :name2, :result)
+        sport_params[:user_id] = current_user.id
         @sport = Sport.new(sport_params)
         if @sport.save
             flash[:notice] = "データを1件登録しました"
