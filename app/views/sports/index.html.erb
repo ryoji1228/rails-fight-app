@@ -1,0 +1,48 @@
+<h1>試合結果</h1>
+
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with method: "get", local: true do |f| %>
+      <div class="form-row">
+          <div class="col">
+              <%= f.number_field "year", placeholder: "年度を入力", class: "form-control" %>
+          </div>
+          <div class="col">
+              <%= f.number_field "month", placeholder: "対象月を入力", class: "form-control" %>
+          </div>
+          <div class="col">
+              <%= f.text_field "name1", placeholder: "赤コーナー", class: "form-control" %>
+          </div>
+          <div class="col">
+              <%= f.text_field "name2", placeholder: "青コーナー", class: "form-control" %>
+          </div>
+          <div class="col">
+              <%= f.submit "検索", class: "btn btn-dark" %>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to "新規", new_sport_path, class: "btn btn-dark" %>
+<table class="table table-dark table-striped">
+    <tr>
+        <th>年月</th>
+        <th>赤　　　青</th>
+        <th>勝者</th>
+        <th>リンク</th>
+    </tr>
+    <% @sports.each do |sport| %>
+    <tr>
+        <td><%= sport.year %>年<%= sport.month %>月</td>
+        <td><%= sport.name1 %> VS <%= sport.name2 %></td>
+        <td><%= sport.result %></td>
+        <td>
+            <%= link_to "詳細", sport_path(sport), class: "btn btn-light" %>
+            <%= link_to "編集", edit_sport_path(sport), class: "btn btn-light" %>
+            <%= link_to "削除", sport_path(sport), method: "delete", data: { confirm: '本当に削 除しますか?' }, class: "btn btn-light" %>
+        </td>
+    </tr>
+    <% end %>
+</table>

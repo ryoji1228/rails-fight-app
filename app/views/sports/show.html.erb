@@ -1,0 +1,16 @@
+<h1>詳細</h1>
+<table class="table table-dark table-striped">
+    <tr>
+        <th>年月</th>
+        <td><%= @sport.year %>年<%= @sport.month %>月</td>
+    </tr> 
+    <tr>
+        <th>赤VS青</th>
+        <td><%= @sport.name1 %>VS<%= @sport.name2 %></td>
+    </tr>
+    <tr>
+        <th>勝者</th>
+        <td><%= @sport.result %></td>
+    </tr>
+</table>
+<%= link_to "戻る", sports_path, class: "btn btn-secondary" %>
