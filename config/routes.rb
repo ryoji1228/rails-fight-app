@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   patch "/sports/:id", to: "sports#update"
   delete "/sports/:id", to: "sports#destroy"
   
+  
+  
   devise_for :views
   devise_for :users
   root to: 'sports#index'

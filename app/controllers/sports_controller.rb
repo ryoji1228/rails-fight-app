@@ -2,7 +2,7 @@ class SportsController < ApplicationController
     
     def index
         p current_user
-        @sports = Sport.all
+        @sports = Sport.where(user_id: current_user.id)
         @sports = @sports.where(year: params[:year]) if params[:year].present?
         @sports = @sports.where(month: params[:month]) if params[:month].present?
         @sports = @sports.where(name1: params[:name1]) if params[:name1].present?
@@ -10,7 +10,7 @@ class SportsController < ApplicationController
     end
     
     def show
-        @sport = Sport.find(params[:id])
+        @sport = Sport.where(user_id: current_user.id).find(params[:id])
     end
     
     def new

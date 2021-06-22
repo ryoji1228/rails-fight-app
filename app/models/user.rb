@@ -5,5 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :sports
-         
+  
+  
+  
+  #validates :email, presence: true, uniqueness: true, length: {maximum: 50}
+  
 end
