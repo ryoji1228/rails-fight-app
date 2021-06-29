@@ -2,11 +2,8 @@ class SportsController < ApplicationController
     
     def index
         p current_user
-        @sports = Sport.where(user_id: current_user.id)
-        @sports = @sports.where(year: params[:year]) if params[:year].present?
-        @sports = @sports.where(month: params[:month]) if params[:month].present?
-        @sports = @sports.where(name1: params[:name1]) if params[:name1].present?
-        @sports = @sports.where(name2: params[:name2]) if params[:name2].present?
+        @sports = current_user.sports
+        
     end
     
     def show
@@ -25,13 +22,13 @@ class SportsController < ApplicationController
             flash[:notice] = "データを1件登録しました"
             redirect_to sports_path
         else
-            flash.now[:alert] = "登録に失敗しました。"
+            flash.now[:alert] = "登録に失敗しました"
             render :new
         end
     end
     
     def edit
-        @sport = Sport.find(params[:id])
+        @sport = Sport.where(user_id: current_user.id).find(params[:id])
     end
     
     def update
@@ -47,7 +44,7 @@ class SportsController < ApplicationController
     end
     
     def destroy
-        @sport = Sport.find(params[:id])
+        @sport = current_user.sports
         @sport.destroy
         flash[:notice] = "削除しました"
         redirect_to sports_path
